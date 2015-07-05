@@ -41,6 +41,8 @@ zfs list ${host_zpool}/vmrc \
     || zfs create -o canmount=off -o mountpoint=/usr/local/vmrc ${host_zpool}/vmrc
 zfs list ${host_zpool}/vmrc/distributions \
     || zfs create -o canmount=on                                ${host_zpool}/vmrc/distributions
+zfs list ${host_zpool}/vmrc/vm \
+    || zfs create -o canmount=on                                ${host_zpool}/vmrc/vm
 
 echo
 echo Running mkdir -p /usr/local/etc/rc.d/
