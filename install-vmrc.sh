@@ -3,6 +3,7 @@
 ################################################################ LICENSE
 #
 # Copyright (c) 2012-2014 Michael Dexter <editor@callfortesting.org>
+# Some modifications Copyright (c) 2015 John Ko <git@johnko.ca>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -19,7 +20,7 @@
 ############################################################ INFORMATION
 #
 # Title: virtual machine rc script installation script
-# Version: v.0.7
+# Version: v.0.7-jko
 #
 # Verbose script to install the vmrc rc script and supporting files
 #
@@ -34,6 +35,12 @@ host_vmroot="/usr/local/vmrc/"   # Directory for all vmrc components
 host_vmdir="/usr/local/vmrc/vm/" # VM configurations, images and mount points
 host_distdir="/usr/local/vmrc/distributions/" # OS Distributions
 host_templates="/usr/local/vmrc/templates/"   # VM Templates
+host_zpool="tank"
+
+zfs list ${host_zpool}/vmrc \
+    || zfs create -o canmount=off -o mountpoint=/usr/local/vmrc ${host_zpool}/vmrc
+zfs list ${host_zpool}/vmrc/distributions \
+    || zfs create -o canmount=on                                ${host_zpool}/vmrc/distributions
 
 echo
 echo Running mkdir -p /usr/local/etc/rc.d/
