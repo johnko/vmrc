@@ -21,7 +21,7 @@ nic1="tap bridge0"
 
 # VM runtime boot variables
 vm_cpus="1"              # Number of VM virtual CPUs (max 16) (required)
-vm_ram="2048"            # VM RAM Allocation in MB (required)
+vm_ram="512"            # VM RAM Allocation in MB (required)
 vm_console="stdio"       # "stdio", "nmdm", "tmux" or "screen"
 virtio_type="ahci-hd"    # "ahci-hd" or "virtio-blk" (required)
 
