@@ -45,7 +45,7 @@ install_site="http://files.bgn.pfsense.org"
 #install_site="file://"  # Local payload option once downloaded (choose one)
 site_path="/mirror/downloads/"
                          # Distribution payload directory path
-site_payload="pfSense-2.2.3-RELEASE-2g-amd64-nanobsd.img.gz"
+site_payload="pfSense-2.2.4-RELEASE-2g-amd64-nanobsd.img.gz"
                          # Distribution payload file(s) (space separated)
 requires_tty=""          # "yes" if a serial tty is required (FreeBSD only)
 obj_srcdir=""            # Location of OS sources (uses /usr/obj) (FreeBSD only)
