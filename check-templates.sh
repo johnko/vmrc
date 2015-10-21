@@ -1,9 +1,9 @@
 #!/bin/sh
-# 
+#
 ################################################################ LICENSE
 #
 # Copyright (c) 2012-2014 Michael Dexter <editor@callfortesting.org>
-# 
+#
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
 # copyright notice and this permission notice appear in all copies.
@@ -26,7 +26,7 @@
 
 # Requires wget - easily replaced with fetch -s, output supression and return check
 
-host_distdir="/usr/local/vmrc/templates/"
+host_distdir="/vmrc/templates/"
 
 for link in "$host_distdir"/*; do
 

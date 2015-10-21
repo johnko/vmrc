@@ -111,7 +111,7 @@ that can be increased with a documented, one-character change.
 SIGNIFICANT CHANGES from .0.4 to .0.5
 
 * The host_vmroot layout has changed.
-* /usr/local/vm/ is now /usr/local/vmrc/vm/
+* /usr/local/vm/ is now /vmrc/vm/
 * The "provision" option has been replaced by mkvm.sh which is based on a
 library of functions and templates.
 * Experimental preflight script and multiple block device support added.
@@ -146,7 +146,7 @@ the paths to suit your system.
 Verify your host_nic and optional host_zpool in /usr/local/etc/vm.conf
 
 The mkvm.sh script provisions Virtual Machines based on the templates in
-/usr/local/vmrc/templates
+/vmrc/templates
 
 mkvm.sh can be used in a captive manner with:
 
@@ -159,7 +159,7 @@ sh mkvm.sh fbsd10amd64_img_gpt_ufs_dist freebsd
 which will create a VM named "freebsd#" where "#" is a unique, auto-generated
 VM ID number such as "0", resulting in a VM named "freebsd0" in:
 
-/usr/local/vmrc/vm/freebsd0
+/vmrc/vm/freebsd0
 
 The template naming is based on its configuration variables. In this example:
 
@@ -207,7 +207,7 @@ VMs can always be loaded, booted and stopped in a linear manner for debugging:
 ### ISO MODE ###
 
 Templates with "iso" in their names are installed by booting to ISO images
-and formatting their storage devices with the OS's native installer. These are  
+and formatting their storage devices with the OS's native installer. These are
 provisioned by booting in "ISO" mode:
 
 service vm iso openbsd4
@@ -257,7 +257,7 @@ If your VM OS (such as OpenBSD, NetBSD and many GNU/Linux distributions)
 requires an external grub.cfg, a \n separated one can be added to the template.
 For example:
 
-iso_grub_cfg="linux (cd0)/vmlinuz\ninitrc (cd0)/initrd.gz\nboot" 
+iso_grub_cfg="linux (cd0)/vmlinuz\ninitrc (cd0)/initrd.gz\nboot"
 
 This will auto-generate a ~/grub.cfg file with:
 
@@ -267,12 +267,12 @@ boot
 
 vmrc will also auto-generate a device.map file:
 
-/usr/local/vmrc/vm/centos7amd64iso0/device.map
+/vmrc/vm/centos7amd64iso0/device.map
 
 Reads:
 
-(hd0) /usr/local/vmrc/vm//centos7amd64iso0/centos7amd64iso0.img
-(cd0) /usr/local/vmrc/vm//centos7amd64iso0/centos7amd64iso0.iso
+(hd0) /vmrc/vm//centos7amd64iso0/centos7amd64iso0.img
+(cd0) /vmrc/vm//centos7amd64iso0/centos7amd64iso0.iso
 
 Centos7 GRUB with the defice.map file:
 
@@ -291,7 +291,7 @@ on the host filesystem.
 
 For example:
 
-/usr/local/vmrc/vm/centos7amd64iso0/grub.cfg
+/vmrc/vm/centos7amd64iso0/grub.cfg
 
 linux (cd0)/vmlinuz
 initrc (cd0)/initrd.gz
@@ -304,7 +304,7 @@ Once installed, the CentOS 7 grub.cfg exists in:
 The grub.cfg garguments to use this would be:
 
 /usr/local/sbin/grub-bhyve -r hd0,msdos1 -d /grub2/ \
--m /usr/local/vmrc/vm/centos7amd64iso0/device.map -M 1024 centos7amd64iso0
+-m /vmrc/vm/centos7amd64iso0/device.map -M 1024 centos7amd64iso0
 
 Other examples:
 
@@ -361,16 +361,16 @@ delete		Delete a VM and its images and directory tree
 
 ### VM LAYOUT ###
 
-/usr/local/vmrc/distributions/  OS distribution sets and ISOs
-/usr/local/vmrc/templates/      VM templates
-/usr/local/vmrc/vm/vm#/vm#.conf    VM config file
-/usr/local/vmrc/vm/vm#/vm#.img     VM raw disk image (format or copy in)
-/usr/local/vmrc/vm/vm#/vm#.iso     Link to bootable ISO image (fetch or copy in)
-/usr/local/vmrc/vm/vm#/mnt/        VM mount point for raw disk image
-/usr/local/vmrc/vm/vm#/vm#.log     VM command log
+/vmrc/distributions/  OS distribution sets and ISOs
+/vmrc/templates/      VM templates
+/vmrc/vm/vm#/vm#.conf    VM config file
+/vmrc/vm/vm#/vm#.img     VM raw disk image (format or copy in)
+/vmrc/vm/vm#/vm#.iso     Link to bootable ISO image (fetch or copy in)
+/vmrc/vm/vm#/mnt/        VM mount point for raw disk image
+/vmrc/vm/vm#/vm#.log     VM command log
 
 The ifconfig_cmd.sh, bhyveload_cmd.sh and bhyve_cmd.sh shell scripts will also
-be created in /usr/local/vmrc/vm/vm#/ at boot time and can be run independently
+be created in /vmrc/vm/vm#/ at boot time and can be run independently
 of vmrc for testing purposes. Note that these will not create the network
 bridge or perform any VM cleanup.
 
@@ -424,7 +424,7 @@ July 1st, 2014 onward.
 
 tmux functionality requires ports/sysutils/tmux
 screen functionality requires ports/sysutils/screen
-ISO and non-FreeBSD VM support requires ports/sysutils/grub2-bhyve 
+ISO and non-FreeBSD VM support requires ports/sysutils/grub2-bhyve
 QEMU functionality requires ports/emulators/qemu(-devel)
 
 
@@ -456,7 +456,7 @@ err_     These templates are largely complete but have known errors of one form
 
 reqtty_  These FreeBSD-based OSs boot but require the tty fix
 
-reqvt_   These FreeBSD-based OSs boot but require VirtIO drivers.  
+reqvt_   These FreeBSD-based OSs boot but require VirtIO drivers.
 
 The tty console fix and VirtIO drivers are easily added but ideally they will
 be included with the upstream OSs.
@@ -506,7 +506,7 @@ bootable block device in the form of a /dev/ device or a disk image plus a
 virtual machine name. These must be consistent between both utilities.
 
 bhyve(8) is provided additional arguments describing PCI devices (notably for
-VirtIO storage and network) plus miscelanous operational parameters. 
+VirtIO storage and network) plus miscelanous operational parameters.
 
 A bhyve(8) virtual machine is shutdown with a reboot(8) command and the
 /dev/vmm/<vmname> entry is cleaned up with the bhyvect(8) command.
@@ -575,7 +575,7 @@ etc. The vm rc script will output the bhyveload and bhyve command strings that
 it generates prior to executing them. If you copy these out, they should work
 on their own along with the preflight script if included.
 
-Each VM directory in /usr/local/vmrc/vm/ is fully self-contained and is
+Each VM directory in /vmrc/vm/ is fully self-contained and is
 only referenced by the vm script looking for VMs in the vm/ directory and then
 using the unique numeric VM ID number at the end of the virtual machine.
 
@@ -593,7 +593,7 @@ association with a given VM. The solution is to add a suffix to the tap device,
 indicating the NIC ID (vm0's tap0 -> tap01 or vm3's tap3 ->tap31).
 
 This revealed a problem: ifconfig will now allow for tap ID's to be
-prefixed with "0" and thus vm0's tap03 would be invalid. To solve this, vmrc 
+prefixed with "0" and thus vm0's tap03 would be invalid. To solve this, vmrc
 emplys a double digit VMID that is prefixed with the arbitrary "8", resulting
 in vm0's fourth network interface being:
 
@@ -611,4 +611,3 @@ Thank you Neel, Peter, John B. and Tycho for your hard work on bhyve.
 
 Thank you Devin for greatly improving this script and Allan at ScaleEngine for
 testing it and providing resources for it and bhyve's improvement.
-

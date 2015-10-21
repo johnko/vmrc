@@ -38,9 +38,9 @@ echo Running rm /usr/local/etc/vm.conf
 rm /usr/local/etc/vm.conf
 
 echo
-echo Removing the /usr/local/vmrc directory
-chflags -R noschg /usr/local/vmrc/
-rm -rf /usr/local/vmrc
+echo Removing the /vmrc directory
+chflags -R noschg /vmrc/
+rm -rf /vmrc
 
 echo
 echo Deletion complete within the limits of available permissions

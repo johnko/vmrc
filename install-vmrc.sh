@@ -31,14 +31,14 @@
 ########################################################################
 
 # Keep in sync with /usr/local/vm.conf
-host_vmroot="/usr/local/vmrc/"   # Directory for all vmrc components
-host_vmdir="/usr/local/vmrc/vm/" # VM configurations, images and mount points
-host_distdir="/usr/local/vmrc/distributions/" # OS Distributions
-host_templates="/usr/local/vmrc/templates/"   # VM Templates
+host_vmroot="/vmrc/"   # Directory for all vmrc components
+host_vmdir="/vmrc/vm/" # VM configurations, images and mount points
+host_distdir="/vmrc/distributions/" # OS Distributions
+host_templates="/vmrc/templates/"   # VM Templates
 host_zpool="tank"
 
 zfs list ${host_zpool}/vmrc \
-    || zfs create -o canmount=off -o mountpoint=/usr/local/vmrc ${host_zpool}/vmrc
+    || zfs create -o canmount=off -o mountpoint=/vmrc ${host_zpool}/vmrc
 zfs list ${host_zpool}/vmrc/distributions \
     || zfs create -o canmount=on                                ${host_zpool}/vmrc/distributions
 zfs list ${host_zpool}/vmrc/vm \
@@ -65,7 +65,7 @@ echo Running cp vm.conf /usr/local/etc/
 cp vm.conf /usr/local/etc/
 
 echo
-echo Creating /usr/local/vmrc directories
+echo Creating /vmrc directories
 mkdir -p $host_vmdir
 mkdir -p $host_distdir
 mkdir -p $host_templates

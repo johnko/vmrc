@@ -309,7 +309,7 @@ f_info "Verifying if $1 is already loaded"
 
 # Note that we do not set the iso as $vm_device because grub will handle this
 	f_info "Creating $host_vmdir/$1/device.map"
-	echo "(hd0) $host_vmdir/$1/${1}.img" > $host_vmdir/$1/device.map 
+	echo "(hd0) $host_vmdir/$1/${1}.img" > $host_vmdir/$1/device.map
 
 # The ISO *should* be there but this check will avoid breakage
 	f_info "Checking if we are in ISO boot mode"
@@ -325,7 +325,7 @@ f_info "Verifying if $1 is already loaded"
 	if [ "$vm_cmd" = "iso" -o "$vm_cmd" = "oneiso" ]; then
 		f_info "Generating the $1 grub.cfg # From the config file"
 		echo -e $iso_grub_cfg > $host_vmdir/$1/grub.cfg || \
-			{ f_error "grub.cfg generation failed" ; return 1 ; } 
+			{ f_error "grub.cfg generation failed" ; return 1 ; }
 
 		grub_load_cmd="/usr/local/sbin/grub-bhyve $iso_grub_d $iso_grub_r -m $host_vmdir/$1/device.map -M $vm_ram $1"
 
@@ -403,13 +403,13 @@ f_boot () # $host_vmdir $found ($1) ($vm_name from the multi-argument loop)
 # A sample bhyve command we are building for vm1 with three network iterfaces
 
 # /usr/sbin/bhyve -c 1 -m 1024 -A -H -s 0,hostbridge \
-# -s 2,ahci-hd,/usr/local/vmrc/vm/vm0/vm1.img \
+# -s 2,ahci-hd,/vmrc/vm/vm0/vm1.img \
 # -s 3:0,virtio-net,tap8010 -s 3:1,virtio-net,tap8011 -s 3:2,virtio-net,tap8012\
 # -s 5,lpc -l com1,stdio vm0
 
 # Desired networkworking
 # bridges have options
-# tap is assigned to a bridge and provided to bhyve with options 
+# tap is assigned to a bridge and provided to bhyve with options
 
 # tapN[,mac=xx:xx:xx:xx:xx:xx]
 # vmnetN[,mac=xx:xx:xx:xx:xx:xx]
@@ -952,7 +952,7 @@ f_info "Unmounting $host_vmdir/$1/mnt/dev in case it was jailed"
 [ -f $host_vmdir/$vm_names/${vm_names}.conf ] && \
 	. $host_vmdir/$vm_names/${vm_names}.conf
 [ $vm_os_type ] || \
-{ f_info "$host_vmdir/$vm_names/${vm_names}.conf failed to source." ; exit 1 ;} 
+{ f_info "$host_vmdir/$vm_names/${vm_names}.conf failed to source." ; exit 1 ;}
 
 case $vm_dev_fs in
 	ufs)
@@ -998,7 +998,7 @@ vm_start() # $vm_count $host_vmdir $vm_names
 			[ -f $host_vmdir/$vm_name/${vm_name}.conf ] && . $host_vmdir/$vm_name/${vm_name}.conf
 			[ $vm_os_type ] || \
 			{ f_error "$host_vmdir/$vm_name/${vm_name}.conf failed to source. Skipping" ; return 1 ; }
-	
+
 			case $vm_console in
 			nmdm)
 			/bin/sh /usr/local/etc/rc.d/vm onerun $vm_name &
@@ -1013,7 +1013,7 @@ vm_start() # $vm_count $host_vmdir $vm_names
 /usr/local/bin/screen -d -S $vm_name "/bin/sh /usr/local/etc/rc.d/vm onerun $vm_name"
 			;;
 			*) f_error "\"tmux\" or \"screen\" vm_console required in ${vm_name}.conf"
-				return 1	
+				return 1
 			esac
 		fi
 		done
@@ -1435,7 +1435,7 @@ vm_delete()
 	*) f_error "Please specify a single VM by name"
 		exit 1
 	esac
-	
+
 } # end vm_delete
 
 ############################################################ MAIN SOURCE
@@ -1451,7 +1451,7 @@ vm_count="$#" # number of vm's passed in (preserve $#) DO NOT RE-INITIALIZE
 iso_boot="" # Used by f_boot and vm_iso
 
 # NB! "." exits on error! redirecting errors and checking results
-# .: cannot open /usr/local/vmrc/vm//vm7/vm7.confx: No such file or directory
+# .: cannot open /vmrc/vm//vm7/vm7.confx: No such file or directory
 # FIX: First make sure the file is present, ideally syntax check *.conf
 
 f_info "Reading /usr/local/etc/vm.conf"

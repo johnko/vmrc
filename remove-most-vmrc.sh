@@ -38,13 +38,13 @@ echo Running rm /usr/local/etc/vm.conf
 rm /usr/local/etc/vm.conf
 
 echo
-echo Removing most of the /usr/local/vmrc directory, sans distributions
-chflags -R noschg /usr/local/vmrc/
-rm -rf /usr/local/vmrc/vm
-rm -rf /usr/local/vmrc/templates
+echo Removing most of the /vmrc directory, sans distributions
+chflags -R noschg /vmrc/
+rm -rf /vmrc/vm
+rm -rf /vmrc/templates
 
 echo
 echo Deletion complete within the limits of current permissions
 echo
-echo Leaving /usr/local/vmrc/distributions/
+echo Leaving /vmrc/distributions/
 echo
